@@ -1,77 +1,147 @@
 # markdown-to-word-kit
 
-Markdown 转 Word DOCX 工具包，支持自定义模板、目录、图片、图表渲染、列表优化和页眉页脚迁移。
+基于 Pandoc 的 Markdown 转 Word DOCX 工具包，支持自定义 Word 模板、目录、图片、Mermaid/PlantUML 图表、列表优化和页眉页脚迁移。
 
-## 仓库内容
+## 适用场景
 
-这个 Git 仓库只保留必要的脚本、模板和说明：
+- 把 Markdown 文档转换成排版规整的 Word `.docx`。
+- 使用统一的 `template.docx` 控制正文、标题、目录、表格、代码块等样式。
+- 在 Windows 上提供可解压即用的全量包。
+- 在 macOS 上使用本机已有的 `python3` 和 `pandoc` 快速转换。
+- 后续拿到公司标准 Word 后，只迁移页眉页脚，不破坏当前正文样式。
 
-- `md2word-mac/`：Mac/Linux 轻量版本，使用系统已安装的 `python3` 和 `pandoc`。
-- `md2word-win/`：Windows 版本源码和模板，不在 Git 中保存便携工具目录。
-- `md2word-win/_md2word/template.docx`：Pandoc reference docx 模板。
-- `md2word-win/_md2word/import-header-footer.py`：从公司 Word 文档迁移页眉页脚的脚本。
+## 仓库结构
 
-不放进 Git 的内容：
+```text
+markdown-to-word-kit/
+  README.md
+  md2word-win/
+    convert.bat
+    README.md
+    _md2word/
+      md2docx.py
+      postprocess_docx.py
+      import-header-footer.py
+      diagram-filter.lua
+      install-tools.ps1
+      template.docx
+  md2word-mac/
+    convert.sh
+    README.md
+    _md2word/
+      md2docx.py
+      postprocess_docx.py
+      import-header-footer.py
+      diagram-filter.lua
+      template.docx
+```
 
-- `dist/` 发布压缩包
-- `md2word-win/_md2word/tools/` Windows 便携工具目录
-- 验证输出、临时文件、历史调试文件
+Git 仓库只保留必要脚本、模板和说明。发布压缩包、Windows 便携工具目录、验证输出和临时文件不进入 Git。
 
 ## 发布包
 
-发布包放在 GitHub Releases 中，不直接提交到 Git：
+发布包建议放在 GitHub Releases 中，不提交到 Git 仓库。
 
-- `markdown-to-word-kit-v0.1.0-windows-full.zip`：Windows 全量包，包含 Python、Pandoc、Node.js、Mermaid CLI 和已下载资源，解压后可直接运行 `convert.bat`。
-- `markdown-to-word-kit-v0.1.0-windows-minimal.zip`：Windows 最小包，不包含 Python、Pandoc、Node.js 或 Mermaid CLI；适合从源码安装工具，或在已有工具环境中使用。
-- `markdown-to-word-kit-v0.1.0-macos-full.zip`：macOS 全量包，包含模板和脚本，不内置 Pandoc/Node，使用本机已安装工具。
-- `markdown-to-word-kit-v0.1.0-macos-minimal.zip`：macOS 最小包，内容与标准包一致但命名明确，适合和 Windows 最小包一起分发。
-- `SHA256SUMS.txt`：发布包校验值。
+| 文件 | 用途 | 是否内置工具 |
+| --- | --- | --- |
+| `markdown-to-word-kit-v0.1.0-windows-full.zip` | Windows 全量包，解压即用 | 是，包含 Python、Pandoc、Node.js、Mermaid CLI |
+| `markdown-to-word-kit-v0.1.0-windows-minimal.zip` | Windows 最小包，需要先安装工具 | 否 |
+| `markdown-to-word-kit-v0.1.0-macos-full.zip` | macOS 全量命名包，使用系统工具 | 否 |
+| `markdown-to-word-kit-v0.1.0-macos-minimal.zip` | macOS 最小命名包，使用系统工具 | 否 |
+| `SHA256SUMS.txt` | 发布包校验值 | 不适用 |
 
-本地打包产物默认位于：
+说明：当前 macOS 的 `full` 与 `minimal` 内容一致，因为 macOS 包不内置 Pandoc、Node.js 或 Mermaid CLI；保留两个名称是为了和 Windows 的发布命名保持一致。
+
+本地打包产物位于：
 
 ```text
 dist/
 ```
 
-## Mac 使用
+## 快速开始
+
+Windows 推荐下载：
+
+```text
+markdown-to-word-kit-v0.1.0-windows-full.zip
+```
+
+解压后运行：
+
+```bat
+convert.bat input.md output.docx
+```
+
+macOS 推荐下载：
+
+```text
+markdown-to-word-kit-v0.1.0-macos-full.zip
+```
+
+解压后运行：
 
 ```bash
 cd md2word-mac
 ./convert.sh input.md output.docx
 ```
 
-## Windows 使用
+## 图表支持
 
-如果希望 Windows 解压即用，推荐从 Release 下载 `markdown-to-word-kit-v0.1.0-windows-full.zip`，解压后运行：
+Markdown 中可以写 Mermaid 或 PlantUML 代码块。转换时使用：
 
-```bat
-convert.bat input.md output.docx
+```bash
+--diagrams
 ```
 
-如果希望包体积小，下载 `markdown-to-word-kit-v0.1.0-windows-minimal.zip`，解压后先安装工具：
+如果希望有图表工具就渲染、没有工具就保留为代码块，使用：
 
-```powershell
-cd md2word-win\_md2word
-.\install-tools.ps1 -WithMermaid
+```bash
+--auto-diagrams
 ```
 
-如果要渲染 Mermaid / PlantUML：
+Windows 全量包已经内置 Mermaid CLI，并会优先复用系统 Edge 或 Chrome 作为浏览器内核。
 
-```bat
-convert.bat input.md output.docx --diagrams
+## 图片路径
+
+推荐使用相对于 Markdown 文件所在目录的路径：
+
+```markdown
+![架构图](images/architecture.png)
+![带空格的图片](<images/process flow.png>)
 ```
+
+也支持 HTTPS 网络图片。转换程序会先尝试下载网络图片，再嵌入到 Word 中。
 
 ## 页眉页脚迁移
 
-拿到公司 Word 模板后，可以只迁移页眉页脚，不破坏当前 Markdown 样式：
+如果后续拿到公司标准 Word，可以只迁移页眉页脚，不直接覆盖整个 `template.docx`。这样可以保留当前已经调好的正文、标题、目录、列表和表格样式。
+
+macOS 示例：
 
 ```bash
 python3 md2word-mac/_md2word/import-header-footer.py company-template.docx md2word-mac/_md2word/template.docx -o template.company.docx
 ```
 
-Windows 便携包中也包含同一个脚本：
+Windows 示例：
 
 ```bat
 cd md2word-win\_md2word
 tools\python\python.exe import-header-footer.py company-template.docx template.docx -o template.company.docx
 ```
+
+确认 `template.company.docx` 的页眉页脚正确后，再替换正式模板。
+
+## 开发说明
+
+常用验证命令：
+
+```bash
+python3 -m py_compile md2word-mac/_md2word/*.py md2word-win/_md2word/*.py
+```
+
+仓库忽略以下内容：
+
+- `dist/`
+- `md2word-win/_md2word/tools/`
+- `verification/`
+- 临时 DOCX、Python 缓存和系统文件
