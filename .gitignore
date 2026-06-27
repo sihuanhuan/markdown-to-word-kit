@@ -17,6 +17,16 @@ __pycache__/
 */.pandoc-diagrams/
 
 # Verification outputs and historical scratch files
-/verification/outputs/
-/verification/header-footer/
+/verification/
 /win-verify/
+
+# Local development/reference files kept out of the public source tree
+/WINDOWS_USAGE.md
+/build_pandoc_template.py
+/convert.bat
+/diagram-filter.lua
+/install-tools.ps1
+/md2docx.py
+/postprocess_docx.py
+/template.docx
+/毕业论文.docx
