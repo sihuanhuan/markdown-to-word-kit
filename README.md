@@ -21,9 +21,9 @@ Markdown 转 Word DOCX 工具包，支持自定义模板、目录、图片、图
 
 发布包放在 GitHub Releases 中，不直接提交到 Git：
 
-- `markdown-to-word-kit-v0.1.0-windows-portable.zip`：Windows 便携包，包含 Python、Pandoc、Node.js、Mermaid CLI 和已下载资源，解压后可直接运行 `convert.bat`。
+- `markdown-to-word-kit-v0.1.0-windows-full.zip`：Windows 全量包，包含 Python、Pandoc、Node.js、Mermaid CLI 和已下载资源，解压后可直接运行 `convert.bat`。
 - `markdown-to-word-kit-v0.1.0-windows-minimal.zip`：Windows 最小包，不包含 Python、Pandoc、Node.js 或 Mermaid CLI；适合从源码安装工具，或在已有工具环境中使用。
-- `markdown-to-word-kit-v0.1.0-macos-standard.zip`：macOS 标准包，包含模板和脚本，不内置 Pandoc/Node，使用本机已安装工具。
+- `markdown-to-word-kit-v0.1.0-macos-full.zip`：macOS 全量包，包含模板和脚本，不内置 Pandoc/Node，使用本机已安装工具。
 - `markdown-to-word-kit-v0.1.0-macos-minimal.zip`：macOS 最小包，内容与标准包一致但命名明确，适合和 Windows 最小包一起分发。
 - `SHA256SUMS.txt`：发布包校验值。
 
@@ -42,7 +42,7 @@ cd md2word-mac
 
 ## Windows 使用
 
-如果希望解压即用，推荐从 Release 下载 `markdown-to-word-kit-v0.1.0-windows-portable.zip`，解压后运行：
+如果希望 Windows 解压即用，推荐从 Release 下载 `markdown-to-word-kit-v0.1.0-windows-full.zip`，解压后运行：
 
 ```bat
 convert.bat input.md output.docx
