@@ -85,6 +85,20 @@ cd md2word-mac
 ./convert.sh input.md output.docx
 ```
 
+## 转换效果预览
+
+示例 Markdown：
+
+[examples/sample.md](examples/sample.md)
+
+转换后的 Word：
+
+[examples/sample.docx](examples/sample.docx)
+
+GitHub 预览图：
+
+![Markdown 转 Word 效果预览](examples/assets/sample-preview.png)
+
 ## 图表支持
 
 Markdown 中可以写 Mermaid 或 PlantUML 代码块。转换时使用：
