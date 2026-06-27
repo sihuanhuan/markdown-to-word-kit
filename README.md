@@ -15,6 +15,13 @@
 ```text
 markdown-to-word-kit/
   README.md
+  examples/
+    full-format.md
+    full-format.docx
+    full-format-preview.pdf
+    assets/
+      full-format-preview-page-01.png
+      ...
   md2word-win/
     convert.bat
     README.md
@@ -87,17 +94,38 @@ cd md2word-mac
 
 ## 转换效果预览
 
-示例 Markdown：
+完整格式验证示例：
 
-[examples/sample.md](examples/sample.md)
+- [Markdown 源文件](examples/full-format.md)
+- [转换后的 Word 文档](examples/full-format.docx)
+- [效果展示 PDF](examples/full-format-preview.pdf)
 
-转换后的 Word：
+该示例覆盖摘要、目录、标题编号、段落、强调、链接、脚注、引用、分隔线、无序列表、有序列表、任务列表、表格、代码块、数学公式、本地图片、网络图片、Mermaid 图、定义列表和原样文本。
 
-[examples/sample.docx](examples/sample.docx)
+<p>
+  <img src="examples/assets/full-format-preview-page-01.png" alt="Markdown 转 Word 效果预览第 1 页" width="48%">
+  <img src="examples/assets/full-format-preview-page-02.png" alt="Markdown 转 Word 效果预览第 2 页" width="48%">
+</p>
 
-GitHub 预览图：
+<p>
+  <img src="examples/assets/full-format-preview-page-03.png" alt="Markdown 转 Word 效果预览第 3 页" width="48%">
+  <img src="examples/assets/full-format-preview-page-04.png" alt="Markdown 转 Word 效果预览第 4 页" width="48%">
+</p>
 
-![Markdown 转 Word 效果预览](examples/assets/sample-preview.png)
+<p>
+  <img src="examples/assets/full-format-preview-page-05.png" alt="Markdown 转 Word 效果预览第 5 页" width="48%">
+  <img src="examples/assets/full-format-preview-page-06.png" alt="Markdown 转 Word 效果预览第 6 页" width="48%">
+</p>
+
+<p>
+  <img src="examples/assets/full-format-preview-page-07.png" alt="Markdown 转 Word 效果预览第 7 页" width="48%">
+  <img src="examples/assets/full-format-preview-page-08.png" alt="Markdown 转 Word 效果预览第 8 页" width="48%">
+</p>
+
+<p>
+  <img src="examples/assets/full-format-preview-page-09.png" alt="Markdown 转 Word 效果预览第 9 页" width="48%">
+  <img src="examples/assets/full-format-preview-page-10.png" alt="Markdown 转 Word 效果预览第 10 页" width="48%">
+</p>
 
 ## 图表支持
 
