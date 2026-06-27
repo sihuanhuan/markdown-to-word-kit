@@ -1,0 +1,22 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Generated packages and old ad-hoc archives
+/dist/
+/md2word-win.zip
+
+# Downloaded portable Windows tools are distributed via dist/*.zip,
+# not tracked directly in Git.
+/md2word-win/_md2word/tools/
+
+# Temporary conversion artifacts
+*.raw.docx
+~$*.docx
+.pandoc-diagrams/
+*/.pandoc-diagrams/
+
+# Verification outputs and historical scratch files
+/verification/outputs/
+/verification/header-footer/
+/win-verify/
